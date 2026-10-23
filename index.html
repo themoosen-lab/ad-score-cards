@@ -381,14 +381,18 @@ function scheduleRender() {
   }, 350);
 }
 const fileName = () => { const s = cur(); return `AD_${CARDS[state.kind].file}_Card_${slug(s.name) || "trial"}_${s.date || "undated"}.png`; };
-const canShareFiles = () => {
+// Phones that can share files. iPhone saves through the share sheet ("Save Image"); Android's share sheet has no plain
+// "save to gallery", so Android downloads the image instead and keeps Share as an optional button under the preview.
+const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+const canShareAny = () => {
   try { return !window.claude && !!navigator.canShare && matchMedia("(pointer: coarse)").matches && navigator.canShare({ files: [new File([new Blob(["x"], { type: "image/png" })], "t.png", { type: "image/png" })] }); }
   catch (e) { return false; }
 };
+const canShareFiles = () => isIOS() && canShareAny();
 function showPreview(blob, note) {
   lastBlob = blob;
   $("prev-img").src = URL.createObjectURL(blob); $("preview").hidden = false;
-  $("share-now").hidden = !canShareFiles();
+  $("share-now").hidden = !canShareAny();
   if (note) $("prev-note").textContent = note;
 }
 function shareNow(blob) {   // must run directly inside the tap, with no waiting before it
