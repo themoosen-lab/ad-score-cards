@@ -117,6 +117,7 @@ input, select { font: 500 17px var(--body); color: var(--fg); background: var(--
 
   <p class="hint" id="hint"><span class="desk">Tap a box on the card to mark it; tap it again to clear.</span><span class="mob">Tap the buttons under the card to mark it; tap again to clear. The card updates as you go.</span> <b>One answer per column.</b> Scores fill in at the bottom of the card as you go.</p>
 
+  <div class="dcards" id="dcards" hidden aria-label="Diver cards"></div>
   <div class="cardbox" id="card" role="group" aria-label="Score card"></div>
   <div class="picker" id="picker" aria-label="Mark the card"></div>
 
@@ -166,6 +167,56 @@ input, select { font: 500 17px var(--body); color: var(--fg); background: var(--
 
 <div class="mbar" id="mbar" aria-label="Score so far"><div class="mnum" id="m-total">0<small>/100</small></div><span class="chip open" id="m-chip">In progress</span><button class="btn primary" id="m-save" type="button">Save image</button></div>
 
+<style id="ad-bg">
+/* Armored Division backdrop: gunmetal tread plate, tank tracks rolling across the page, a hazard band, and a parked tank. */
+body {
+  background-color: #0d1110;
+  background-image:
+    repeating-linear-gradient(-45deg, rgba(236,187,34,.9) 0 14px, #111 14px 28px),
+    radial-gradient(1100px 620px at 8% -6%, rgba(118,128,72,.20), transparent 70%),
+    radial-gradient(900px 600px at 100% 104%, rgba(236,187,34,.075), transparent 70%),
+    linear-gradient(180deg, #121715 0%, #0c100f 55%, #0a0d0c 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Cg fill='none' stroke-linecap='round' stroke-width='3'%3E%3Cpath d='M5 13 L13 5' stroke='rgba(0,0,0,.55)' transform='translate(1 1.4)'/%3E%3Cpath d='M5 13 L13 5' stroke='rgba(205,214,190,.11)'/%3E%3Cpath d='M23 22 L31 30' stroke='rgba(0,0,0,.55)' transform='translate(1 1.4)'/%3E%3Cpath d='M23 22 L31 30' stroke='rgba(205,214,190,.11)'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 100% 6px, auto, auto, auto, 36px 36px;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat;
+  background-position: 0 0, 0 0, 0 0, 0 0, 0 0;
+  background-attachment: scroll, fixed, fixed, fixed, scroll;
+}
+body::before {
+  content: ""; position: fixed; z-index: -1; pointer-events: none;
+  left: -40vw; right: -40vw; top: 46%; height: 150px; transform: rotate(-11deg);
+  background:
+    repeating-linear-gradient(90deg, rgba(190,198,170,.075) 0 16px, transparent 16px 30px) 0 0 / 100% 46px no-repeat,
+    repeating-linear-gradient(90deg, rgba(190,198,170,.075) 0 16px, transparent 16px 30px) 8px 104px / 100% 46px no-repeat;
+  -webkit-mask-image: linear-gradient(90deg, transparent 8%, #000 35%, #000 70%, transparent 95%);
+          mask-image: linear-gradient(90deg, transparent 8%, #000 35%, #000 70%, transparent 95%);
+}
+body::after {
+  content: ""; position: fixed; z-index: -1; pointer-events: none;
+  right: -2vw; bottom: 2vh; width: min(760px, 92vw); aspect-ratio: 640 / 240;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Cg fill='%23b9b48c' fill-rule='evenodd'%3E%0A%3Cpath d='M70 150 L500 150 Q560 150 560 185 Q560 222 520 222 L90 222 Q48 222 48 186 Q48 150 70 150 Z M98 186 m-20 0 a20 20 0 1 0 40 0 a20 20 0 1 0 -40 0 Z M160 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M222 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M284 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M346 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M408 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M470 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M526 184 m-17 0 a17 17 0 1 0 34 0 a17 17 0 1 0 -34 0 Z'/%3E%0A%3Cpath d='M36 146 L84 108 L512 108 L572 146 Z'/%3E%0A%3Cpath d='M196 108 L224 70 L372 64 L410 82 L414 108 Z'/%3E%0A%3Cpath d='M404 80 L604 80 L604 90 L404 92 Z'/%3E%3Cpath d='M596 74 L624 74 L624 96 L596 96 Z'/%3E%0A%3Cpath d='M258 66 L262 52 L304 52 L308 66 Z'/%3E%0A%3Cpath d='M228 70 L210 8 L213 7 L232 69 Z'/%3E%0A%3Cpath d='M520 112 L548 112 L548 120 L520 120 Z' fill-opacity='.0'/%3E%3C/g%3E%3C/svg%3E") center / contain no-repeat; opacity: .065;
+}
+.box, .picker fieldset { background: rgba(27,35,43,.9); }
+header::after { content: ""; position: absolute; right: 430px; bottom: 0; width: 132px; height: 50px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Cg fill='%23b9b48c' fill-rule='evenodd'%3E%0A%3Cpath d='M70 150 L500 150 Q560 150 560 185 Q560 222 520 222 L90 222 Q48 222 48 186 Q48 150 70 150 Z M98 186 m-20 0 a20 20 0 1 0 40 0 a20 20 0 1 0 -40 0 Z M160 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M222 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M284 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M346 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M408 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M470 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M526 184 m-17 0 a17 17 0 1 0 34 0 a17 17 0 1 0 -34 0 Z'/%3E%0A%3Cpath d='M36 146 L84 108 L512 108 L572 146 Z'/%3E%0A%3Cpath d='M196 108 L224 70 L372 64 L410 82 L414 108 Z'/%3E%0A%3Cpath d='M404 80 L604 80 L604 90 L404 92 Z'/%3E%3Cpath d='M596 74 L624 74 L624 96 L596 96 Z'/%3E%0A%3Cpath d='M258 66 L262 52 L304 52 L308 66 Z'/%3E%0A%3Cpath d='M228 70 L210 8 L213 7 L232 69 Z'/%3E%0A%3Cpath d='M520 112 L548 112 L548 120 L520 120 Z' fill-opacity='.0'/%3E%3C/g%3E%3C/svg%3E") center bottom / contain no-repeat; opacity: .45; pointer-events: none; }
+@media (max-width: 1100px) { header::after { display: none; } }
+@media (max-width: 700px) { body::after { opacity: .05; bottom: 110px; } body::before { top: 38%; height: 110px; } }
+@media print { body { background: #fff; } body::before, body::after { display: none; } }
+</style>
+<style id="dcards-style">
+.dcards { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.dc-lab { font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); margin-right: 4px; }
+.dc { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 14px; font: 600 16px var(--body); color: var(--fg); background: var(--deck); border: 1px solid var(--line); cursor: pointer; max-width: 100%; }
+.dc b { font-weight: 600; max-width: 16ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dc .n { font: 800 15px var(--display); color: var(--gold); }
+.dc i { font-style: normal; font: 700 14px var(--display); color: var(--faint); }
+.dc[aria-selected="true"] { background: var(--gold); border-color: var(--gold); color: #1a1405; }
+.dc[aria-selected="true"] .n, .dc[aria-selected="true"] i { color: #1a1405; }
+.dc-add { border-style: dashed; color: var(--gold); font-family: var(--display); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.dc-rm { background: transparent; color: var(--dim); font-size: 14px; }
+.dc-rm.arm { color: #fff; border-color: var(--fail); background: var(--fail); }
+.dc-note { flex-basis: 100%; color: var(--dim); font-size: 14px; }
+@media (max-width: 560px) { .dc-lab { flex-basis: 100%; font-size: 13px; } .dc { min-height: 40px; padding: 5px 11px; font-size: 15px; } .dc b { max-width: 11ch; } .dc-add, .dc-rm { font-size: 13px; } }
+</style>
 <style id="crew-style">
 .crew { grid-column: 1 / -1; display: grid; gap: 10px; }
 .crew:empty, .crew [hidden], .crew-add[hidden] { display: none !important; }
@@ -214,6 +265,15 @@ const SCORE_Y = [76.21, 5.59];
 const blank = () => ({ picks: {}, name: "", rank: "", tier: "", to: "", date: (d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`)(new Date()), calls: 0 });
 let state = { kind: "exo", exo: blank(), veh: blank() };
 try { const s = JSON.parse(localStorage.getItem("ad-score-draft") || "null"); if (s && s.exo && s.veh) state = s; } catch (e) {}
+function newExoCard(from, p) { return Object.assign(blank(), { name: (p && p.name) || "", rank: (p && p.rank) || "", tier: from.tier || "", to: from.to || "", date: from.date || blank().date, picks: from.picks && from.picks.faction != null ? { faction: from.picks.faction } : {} }); }
+function linkExo() {
+  if (!Array.isArray(state.exoCards) || !state.exoCards.length) state.exoCards = [state.exo];
+  state.exoIdx = Math.min(Math.max(0, state.exoIdx | 0), state.exoCards.length - 1);
+  // drafts from the first multi-diver version kept extra exosuit divers as rows on one card; each gets their own card now
+  state.exoCards.forEach((c) => { if (Array.isArray(c.crew) && c.crew.length) { c.crew.filter((x) => (x.name || "").trim() || (x.rank || "").trim()).forEach((x) => { if (state.exoCards.length < 4) state.exoCards.push(newExoCard(c, x)); }); c.crew = []; } });
+  state.exo = state.exoCards[state.exoIdx];
+}
+linkExo();
 const persist = () => { try { localStorage.setItem("ad-score-draft", JSON.stringify(state)); } catch (e) {} };
 const cur = () => state[state.kind];
 const $ = (id) => document.getElementById(id);
@@ -304,7 +364,20 @@ function renderCrew() {
   document.querySelector("#crew-0 .seat-only").hidden = !veh; $("f-seat").innerHTML = seatOptions(s.seat);
   $("crew-more").innerHTML = s.crew.map((p, i) => `<div class="crew-row${veh ? " seats" : ""}"><label>${veh ? "Crew member" : "Diver"} ${i + 2}<input data-ci="${i}" data-ck="name" value="${escH(p.name)}" autocomplete="off" placeholder="Callsign"></label><label>Current rank<input data-ci="${i}" data-ck="rank" value="${escH(p.rank)}" autocomplete="off" placeholder="Rank held right now"></label>${veh ? `<label>Seat<select data-ci="${i}" data-ck="seat">${seatOptions(p.seat)}</select></label>` : ""}<button type="button" class="crew-x" data-cx="${i}" aria-label="Remove ${veh ? "crew member" : "diver"} ${i + 2}">×</button></div>`).join("");
   const add = $("crew-add"); add.hidden = s.crew.length >= 3; add.textContent = veh ? "+ Add a crew member" : "+ Add a diver";
+  if (!veh) { $("crew-more").innerHTML = ""; add.hidden = true; $("name-lab").textContent = state.exoCards.length > 1 ? `Diver on card ${state.exoIdx + 1}` : "Diver"; }
+  renderDCards();
 }
+let dcArm = false;
+const withCard = (c, fn) => { const prev = state.exo; state.exo = c; try { return fn(); } finally { state.exo = prev; } };
+function renderDCards() {
+  const box = $("dcards"), exo = state.kind === "exo"; box.hidden = !exo; if (!exo) return;
+  const n = state.exoCards.length;
+  box.innerHTML = `<span class="dc-lab">Diver cards</span>` + state.exoCards.map((c, i) => { const ev = withCard(c, () => evaluate("exo")), done = !ev.missing || !ev.missing.length;
+      return `<button type="button" class="dc" data-dc="${i}" aria-selected="${i === state.exoIdx}" aria-label="Card ${i + 1}: ${escH(c.name.trim() || "unnamed diver")}"><span class="n">${i + 1}</span><b>${escH(c.name.trim() || "Unnamed")}</b>${ev.dq ? "<i>DQ</i>" : done ? `<i>${ev.total}</i>` : ""}</button>`; }).join("")
+    + (n < 4 ? `<button type="button" class="dc dc-add" id="dc-add">+ Add a diver card</button>` : "")
+    + (n > 1 ? `<button type="button" class="dc dc-rm${dcArm ? " arm" : ""}" id="dc-rm">${dcArm ? `Tap again to remove card ${state.exoIdx + 1}` : `Remove card ${state.exoIdx + 1}`}</button><span class="dc-note">Each diver pilots their own exosuit, so each gets their own card. Mark and save each one. Tier, T.O. and date are shared.</span>` : "");
+}
+function goExoCard(i) { state.exoIdx = i; state.exo = state.exoCards[i]; dcArm = false; $("preview").hidden = true; $("confirm").hidden = true; setStatus(""); syncFields(); refresh(); }
 function syncFields() { const s = cur(); renderCrew(); $("f-name").value = s.name; $("f-rank").value = s.rank || ""; $("f-tier").value = s.tier; $("f-to").value = s.to; $("f-date").value = s.date; }
 function refresh() {
   const kind = state.kind, s = cur(), ev = evaluate(kind);
@@ -317,6 +390,7 @@ function refresh() {
   $("m-total").innerHTML = $("total").innerHTML; const mc = $("m-chip"); mc.className = chip.className; mc.textContent = ev.res.txt;
   $("sub").textContent = ev.res.sub;
   if (state.kind === "veh" && document.activeElement && !document.activeElement.closest("#crew-wrap")) renderCrew();
+  if (!document.activeElement || !document.activeElement.closest("#dcards")) renderDCards();
   buildCard(); persist(); scheduleRender();
 }
 
@@ -472,7 +546,7 @@ async function saveSlow() {
 $("share-now").addEventListener("click", () => { if (lastBlob) shareNow(lastBlob); });
 $("m-save").addEventListener("click", () => $("save").click());
 $("copy").addEventListener("click", async () => {
-  const t = summaryText();
+  const t = state.kind === "exo" && state.exoCards.length > 1 ? state.exoCards.map((c) => withCard(c, summaryText)).join("\n\n") : summaryText();
   try { await navigator.clipboard.writeText(t); setStatus("Result copied. Paste it in Discord."); }
   catch (e) {
     const ta = document.createElement("textarea"); ta.value = t; ta.setAttribute("aria-label", "Result text"); ta.rows = 5; ta.style.width = "100%";
@@ -482,13 +556,20 @@ $("copy").addEventListener("click", async () => {
 $("picker").addEventListener("click", (e) => { const b = e.target.closest(".opt"); if (!b) return; const k = b.dataset.col, i = +b.dataset.i, p = cur().picks; if (p[k] === i) delete p[k]; else p[k] = i; refresh(); });
 $("clear").addEventListener("click", () => { $("confirm").hidden = false; });
 $("clear-no").addEventListener("click", () => { $("confirm").hidden = true; });
-$("clear-yes").addEventListener("click", () => { state[state.kind] = blank(); if (state.kind === "veh") state.veh.calls = 0; $("confirm").hidden = true; $("preview").hidden = true; setStatus("Card cleared."); syncFields(); refresh(); });
+$("clear-yes").addEventListener("click", () => { if (state.kind === "exo") { const k = state.exo; state.exo = state.exoCards[state.exoIdx] = Object.assign(blank(), state.exoCards.length > 1 ? { tier: k.tier, to: k.to, date: k.date } : {}); } else state[state.kind] = blank(); if (state.kind === "veh") state.veh.calls = 0; $("confirm").hidden = true; $("preview").hidden = true; setStatus("Card cleared."); syncFields(); refresh(); });
 document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => { state.kind = t.dataset.kind; $("preview").hidden = true; setStatus(""); syncFields(); refresh(); }));
 $("f-seat").addEventListener("change", () => { cur().seat = $("f-seat").value; refresh(); });
 $("crew-more").addEventListener("input", (e) => { const t = e.target; if (t.dataset.ci == null) return; cur().crew[+t.dataset.ci][t.dataset.ck] = t.value; refresh(); });
 $("crew-more").addEventListener("change", (e) => { const t = e.target; if (t.tagName !== "SELECT") return; cur().crew[+t.dataset.ci].seat = t.value; refresh(); });
 $("crew-more").addEventListener("click", (e) => { const b = e.target.closest("[data-cx]"); if (!b) return; cur().crew.splice(+b.dataset.cx, 1); renderCrew(); refresh(); });
 $("crew-add").addEventListener("click", () => { const s = cur(); s.crew = s.crew || []; if (s.crew.length >= 3) return; const used = crewOf(s).map((p) => p.seat); const seat = state.kind === "veh" ? (seatList().find((x) => !used.includes(x)) || "") : ""; s.crew.push({ name: "", rank: "", seat }); renderCrew(); refresh(); const ins = document.querySelectorAll('#crew-more input[data-ck="name"]'); if (ins.length) ins[ins.length - 1].focus(); });
+$("dcards").addEventListener("click", (e) => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (b.dataset.dc != null) { goExoCard(+b.dataset.dc); return; }
+  if (b.id === "dc-add") { if (state.exoCards.length >= 4) return; state.exoCards.push(newExoCard(state.exo, null)); goExoCard(state.exoCards.length - 1); $("f-name").focus(); return; }
+  if (b.id === "dc-rm") { if (!dcArm) { dcArm = true; renderDCards(); $("dc-rm").focus(); return; } state.exoCards.splice(state.exoIdx, 1); goExoCard(Math.min(state.exoIdx, state.exoCards.length - 1)); }
+});
+["tier", "to", "date"].forEach((k) => ["input", "change"].forEach((ev) => $("f-" + k).addEventListener(ev, () => { if (state.kind === "exo") state.exoCards.forEach((c) => { c[k] = $("f-" + k).value; }); })));
 [["f-name", "name"], ["f-rank", "rank"], ["f-tier", "tier"], ["f-to", "to"], ["f-date", "date"]].forEach(([id, k]) => {
   $(id).addEventListener("input", () => { cur()[k] = $(id).value; refresh(); });
 });
