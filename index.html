@@ -170,13 +170,13 @@ input, select { font: 500 17px var(--body); color: var(--fg); background: var(--
 <style id="ad-bg">
 /* Armored Division backdrop: gunmetal tread plate, tank tracks rolling across the page, a hazard band, and a parked tank. */
 body {
-  background-color: #0d1110;
+  background-color: #0b0f13;
   background-image:
     repeating-linear-gradient(-45deg, rgba(236,187,34,.9) 0 14px, #111 14px 28px),
-    radial-gradient(1100px 620px at 8% -6%, rgba(118,128,72,.20), transparent 70%),
+    radial-gradient(1100px 620px at 8% -6%, rgba(120,150,180,.10), transparent 70%),
     radial-gradient(900px 600px at 100% 104%, rgba(236,187,34,.075), transparent 70%),
-    linear-gradient(180deg, #121715 0%, #0c100f 55%, #0a0d0c 100%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Cg fill='none' stroke-linecap='round' stroke-width='3'%3E%3Cpath d='M5 13 L13 5' stroke='rgba(0,0,0,.55)' transform='translate(1 1.4)'/%3E%3Cpath d='M5 13 L13 5' stroke='rgba(205,214,190,.11)'/%3E%3Cpath d='M23 22 L31 30' stroke='rgba(0,0,0,.55)' transform='translate(1 1.4)'/%3E%3Cpath d='M23 22 L31 30' stroke='rgba(205,214,190,.11)'/%3E%3C/g%3E%3C/svg%3E");
+    linear-gradient(180deg, #10151b 0%, #0b0f13 55%, #090c10 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Cg fill='none' stroke-linecap='round' stroke-width='3'%3E%3Cpath d='M5 13 L13 5' stroke='rgba(0,0,0,.55)' transform='translate(1 1.4)'/%3E%3Cpath d='M5 13 L13 5' stroke='rgba(170,195,220,.09)'/%3E%3Cpath d='M23 22 L31 30' stroke='rgba(0,0,0,.55)' transform='translate(1 1.4)'/%3E%3Cpath d='M23 22 L31 30' stroke='rgba(170,195,220,.09)'/%3E%3C/g%3E%3C/svg%3E");
   background-size: 100% 6px, auto, auto, auto, 36px 36px;
   background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat;
   background-position: 0 0, 0 0, 0 0, 0 0, 0 0;
@@ -186,20 +186,20 @@ body::before {
   content: ""; position: fixed; z-index: -1; pointer-events: none;
   left: -40vw; right: -40vw; top: 46%; height: 150px; transform: rotate(-11deg);
   background:
-    repeating-linear-gradient(90deg, rgba(190,198,170,.075) 0 16px, transparent 16px 30px) 0 0 / 100% 46px no-repeat,
-    repeating-linear-gradient(90deg, rgba(190,198,170,.075) 0 16px, transparent 16px 30px) 8px 104px / 100% 46px no-repeat;
+    repeating-linear-gradient(90deg, rgba(160,185,210,.065) 0 16px, transparent 16px 30px) 0 0 / 100% 46px no-repeat,
+    repeating-linear-gradient(90deg, rgba(160,185,210,.065) 0 16px, transparent 16px 30px) 8px 104px / 100% 46px no-repeat;
   -webkit-mask-image: linear-gradient(90deg, transparent 8%, #000 35%, #000 70%, transparent 95%);
           mask-image: linear-gradient(90deg, transparent 8%, #000 35%, #000 70%, transparent 95%);
 }
 body::after {
   content: ""; position: fixed; z-index: -1; pointer-events: none;
   right: -2vw; bottom: 2vh; width: min(760px, 92vw); aspect-ratio: 640 / 240;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Cg fill='%23b9b48c' fill-rule='evenodd'%3E%0A%3Cpath d='M70 150 L500 150 Q560 150 560 185 Q560 222 520 222 L90 222 Q48 222 48 186 Q48 150 70 150 Z M98 186 m-20 0 a20 20 0 1 0 40 0 a20 20 0 1 0 -40 0 Z M160 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M222 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M284 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M346 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M408 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M470 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M526 184 m-17 0 a17 17 0 1 0 34 0 a17 17 0 1 0 -34 0 Z'/%3E%0A%3Cpath d='M36 146 L84 108 L512 108 L572 146 Z'/%3E%0A%3Cpath d='M196 108 L224 70 L372 64 L410 82 L414 108 Z'/%3E%0A%3Cpath d='M404 80 L604 80 L604 90 L404 92 Z'/%3E%3Cpath d='M596 74 L624 74 L624 96 L596 96 Z'/%3E%0A%3Cpath d='M258 66 L262 52 L304 52 L308 66 Z'/%3E%0A%3Cpath d='M228 70 L210 8 L213 7 L232 69 Z'/%3E%0A%3Cpath d='M520 112 L548 112 L548 120 L520 120 Z' fill-opacity='.0'/%3E%3C/g%3E%3C/svg%3E") center / contain no-repeat; opacity: .065;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Cg fill='%23ecbb22' fill-rule='evenodd'%3E%0A%3Cpath d='M70 150 L500 150 Q560 150 560 185 Q560 222 520 222 L90 222 Q48 222 48 186 Q48 150 70 150 Z M98 186 m-20 0 a20 20 0 1 0 40 0 a20 20 0 1 0 -40 0 Z M160 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M222 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M284 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M346 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M408 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M470 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M526 184 m-17 0 a17 17 0 1 0 34 0 a17 17 0 1 0 -34 0 Z'/%3E%0A%3Cpath d='M36 146 L84 108 L512 108 L572 146 Z'/%3E%0A%3Cpath d='M196 108 L224 70 L372 64 L410 82 L414 108 Z'/%3E%0A%3Cpath d='M404 80 L604 80 L604 90 L404 92 Z'/%3E%3Cpath d='M596 74 L624 74 L624 96 L596 96 Z'/%3E%0A%3Cpath d='M258 66 L262 52 L304 52 L308 66 Z'/%3E%0A%3Cpath d='M228 70 L210 8 L213 7 L232 69 Z'/%3E%0A%3Cpath d='M520 112 L548 112 L548 120 L520 120 Z' fill-opacity='.0'/%3E%3C/g%3E%3C/svg%3E") center / contain no-repeat; opacity: .045;
 }
 .box, .picker fieldset { background: rgba(27,35,43,.9); }
-header::after { content: ""; position: absolute; right: 430px; bottom: 0; width: 132px; height: 50px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Cg fill='%23b9b48c' fill-rule='evenodd'%3E%0A%3Cpath d='M70 150 L500 150 Q560 150 560 185 Q560 222 520 222 L90 222 Q48 222 48 186 Q48 150 70 150 Z M98 186 m-20 0 a20 20 0 1 0 40 0 a20 20 0 1 0 -40 0 Z M160 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M222 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M284 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M346 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M408 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M470 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M526 184 m-17 0 a17 17 0 1 0 34 0 a17 17 0 1 0 -34 0 Z'/%3E%0A%3Cpath d='M36 146 L84 108 L512 108 L572 146 Z'/%3E%0A%3Cpath d='M196 108 L224 70 L372 64 L410 82 L414 108 Z'/%3E%0A%3Cpath d='M404 80 L604 80 L604 90 L404 92 Z'/%3E%3Cpath d='M596 74 L624 74 L624 96 L596 96 Z'/%3E%0A%3Cpath d='M258 66 L262 52 L304 52 L308 66 Z'/%3E%0A%3Cpath d='M228 70 L210 8 L213 7 L232 69 Z'/%3E%0A%3Cpath d='M520 112 L548 112 L548 120 L520 120 Z' fill-opacity='.0'/%3E%3C/g%3E%3C/svg%3E") center bottom / contain no-repeat; opacity: .45; pointer-events: none; }
+header::after { content: ""; position: absolute; right: 430px; bottom: 0; width: 132px; height: 50px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 240'%3E%3Cg fill='%23ecbb22' fill-rule='evenodd'%3E%0A%3Cpath d='M70 150 L500 150 Q560 150 560 185 Q560 222 520 222 L90 222 Q48 222 48 186 Q48 150 70 150 Z M98 186 m-20 0 a20 20 0 1 0 40 0 a20 20 0 1 0 -40 0 Z M160 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M222 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M284 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M346 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M408 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M470 192 m-22 0 a22 22 0 1 0 44 0 a22 22 0 1 0 -44 0 Z M526 184 m-17 0 a17 17 0 1 0 34 0 a17 17 0 1 0 -34 0 Z'/%3E%0A%3Cpath d='M36 146 L84 108 L512 108 L572 146 Z'/%3E%0A%3Cpath d='M196 108 L224 70 L372 64 L410 82 L414 108 Z'/%3E%0A%3Cpath d='M404 80 L604 80 L604 90 L404 92 Z'/%3E%3Cpath d='M596 74 L624 74 L624 96 L596 96 Z'/%3E%0A%3Cpath d='M258 66 L262 52 L304 52 L308 66 Z'/%3E%0A%3Cpath d='M228 70 L210 8 L213 7 L232 69 Z'/%3E%0A%3Cpath d='M520 112 L548 112 L548 120 L520 120 Z' fill-opacity='.0'/%3E%3C/g%3E%3C/svg%3E") center bottom / contain no-repeat; opacity: .5; pointer-events: none; }
 @media (max-width: 1100px) { header::after { display: none; } }
-@media (max-width: 700px) { body::after { opacity: .05; bottom: 110px; } body::before { top: 38%; height: 110px; } }
+@media (max-width: 700px) { body::after { opacity: .035; bottom: 110px; } body::before { top: 38%; height: 110px; } }
 @media print { body { background: #fff; } body::before, body::after { display: none; } }
 </style>
 <style id="dcards-style">
